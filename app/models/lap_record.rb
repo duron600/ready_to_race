@@ -1,0 +1,2 @@
+class LapRecord < ApplicationRecord
+end
