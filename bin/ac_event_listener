@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+
+require File.expand_path('../config/environment', File.dirname(__FILE__))
+
+config = YAML.load_file(File.expand_path('../config/assetto_corsa.yml', File.dirname(__FILE__)))
+
+server = UDPSocket.new
+server.bind(config['ac']['udp_host'], config['ac']['udp_port'])
+
+while true
+  EventDatum.create(:content => server.recvfrom(1024).first)
+end
