@@ -1,0 +1,2 @@
+class UdpDatum < ApplicationRecord
+end

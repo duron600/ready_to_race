@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+
+require File.expand_path('../config/environment', File.dirname(__FILE__))
+
+logger = Logger.new(STDOUT)
+server = UDPSocket.new
+server.bind('127.0.0.1', 8622)
+logger.info "receiver start, data count: #{UdpDatum.count}"
+while true
+  result = server.recvfrom(1024)
+  content = result.first
+  logger.info "received: #{content}"
+  udp_data = UdpDatum.new(:content => content)
+  if udp_data.save
+    logger.info "content saved"
+  else
+    logger.warn udp_data.errors.full_messages.join(', ')
+  end
+end
