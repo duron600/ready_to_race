@@ -23,7 +23,7 @@ module ReadyToRace
       g.javascripts false
     end
 
-    # config.i18n.default_locale = :'zh-CN'
+    config.i18n.default_locale = :'zh-CN'
     config.time_zone = 'Beijing'
   end
 end
