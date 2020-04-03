@@ -1,0 +1,2 @@
+class SessionInfoEvent < AcServerEvent
+end

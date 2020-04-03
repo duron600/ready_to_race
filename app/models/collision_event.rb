@@ -1,0 +1,2 @@
+class CollisionEvent < AcServerEvent
+end

@@ -1,0 +1,2 @@
+class UnknownAcServerEvent < AcServerEvent
+end

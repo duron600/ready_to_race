@@ -10,24 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_31_172637) do
+ActiveRecord::Schema.define(version: 2020_04_03_181450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cars", force: :cascade do |t|
-    t.string "name"
-    t.string "code"
-    t.string "detail"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "event_data", force: :cascade do |t|
-    t.integer "packet_id"
+  create_table "ac_server_events", force: :cascade do |t|
     t.binary "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "type"
+  end
+
+  create_table "cars", force: :cascade do |t|
+    t.string "name"
+    t.string "model"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["model"], name: "index_cars_on_model"
+  end
+
+  create_table "client_connections", force: :cascade do |t|
+    t.bigint "car_id"
+    t.integer "car_index"
+    t.bigint "driver_id"
+    t.datetime "closed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "skin"
+    t.index ["car_id"], name: "index_client_connections_on_car_id"
+    t.index ["driver_id", "car_id"], name: "index_client_connections_on_driver_id_and_car_id"
+  end
+
+  create_table "drivers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "guid"
+    t.index ["guid"], name: "index_drivers_on_guid"
   end
 
   create_table "lap_records", force: :cascade do |t|
@@ -40,10 +60,53 @@ ActiveRecord::Schema.define(version: 2020_03_31_172637) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "racers", force: :cascade do |t|
-    t.string "name"
+  create_table "laps", force: :cascade do |t|
+    t.bigint "session_participation_id"
+    t.integer "time"
+    t.integer "cuts"
+    t.integer "cars_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "leader_boards", force: :cascade do |t|
+    t.bigint "lap_id"
+    t.bigint "session_participation_id"
+    t.integer "rtime"
+    t.integer "rlaps"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "racing_sessions", force: :cascade do |t|
+    t.integer "index"
+    t.integer "current_index"
+    t.integer "count"
+    t.string "server_name"
+    t.string "track_name"
+    t.string "track_config"
+    t.string "name"
+    t.integer "typ"
+    t.integer "time"
+    t.integer "laps"
+    t.integer "wait_time"
+    t.integer "ambient_temperature"
+    t.integer "road_temperature"
+    t.string "weather_graphics"
+    t.string "elapsed_ms"
+    t.string "json_file"
+    t.datetime "end_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "session_participations", force: :cascade do |t|
+    t.bigint "client_connection_id"
+    t.bigint "racing_session_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_connection_id"], name: "index_session_participations_on_client_connection_id"
+    t.index ["racing_session_id", "client_connection_id"], name: "index_session_connection"
   end
 
   create_table "tracks", force: :cascade do |t|

@@ -1,0 +1,2 @@
+class AcClientLoadedEvent < AcServerEvent
+end

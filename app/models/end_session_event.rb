@@ -1,0 +1,2 @@
+class EndSessionEvent < AcServerEvent
+end

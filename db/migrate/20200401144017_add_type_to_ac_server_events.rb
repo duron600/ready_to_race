@@ -1,0 +1,5 @@
+class AddTypeToAcServerEvents < ActiveRecord::Migration[6.0]
+  def change
+    add_column :ac_server_events, :type, :string
+  end
+end

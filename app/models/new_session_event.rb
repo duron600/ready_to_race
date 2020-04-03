@@ -1,0 +1,2 @@
+class NewSessionEvent < AcServerEvent
+end

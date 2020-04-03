@@ -1,0 +1,2 @@
+class LapCompletedEvent < AcServerEvent
+end
