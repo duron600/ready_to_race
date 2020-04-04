@@ -4,7 +4,7 @@ class AcServerEvent < ApplicationRecord
 
   before_create :set_type
 
-  after_create :parse_content
+  after_create :save_parsed_content
 
   private
 
@@ -37,8 +37,8 @@ class AcServerEvent < ApplicationRecord
     end
   end
 
-  def parse_content
-    warn "Unimplement #{self.class.name}#parse_content"
+  def save_parsed_content
+    warn "Unimplement #{self.class.name}#save_parsed_content"
   end
 
 end
