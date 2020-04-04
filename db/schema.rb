@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_04_04_183005) do
     t.string "model"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["model"], name: "index_cars_on_model"
   end
 
   create_table "client_connections", force: :cascade do |t|
