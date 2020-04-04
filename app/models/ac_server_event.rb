@@ -9,7 +9,7 @@ class AcServerEvent < ApplicationRecord
   private
 
   def packet_id
-    content.unpack('C').last
+    AcProtocol.int_8bit(content)
   end
 
   def set_type

@@ -9,31 +9,23 @@ module ConnectionEvent
     @car ||= Car.find_or_create_by(:model => car_model)
   end
 
-  def driver_guid
-    return @driver_guid if defined? @driver_guid
-    length = content.unpack("@#{(driver_name.length * 4 + 2)}C").last
-    @driver_guid = content.unpack("@#{driver_name.length * 4 + 3}" << 'A4' * length).join
+  def driver_name
+    @driver_name ||= AcProtocol.utf_string(content, 1)
   end
 
-  def driver_name
-    return @driver_name if defined? @driver_name
-    length = content.unpack('@1C').last
-    @driver_name = content.unpack('@2' << 'A4' * length).join
+  def driver_guid
+    @driver_guid ||= AcProtocol.utf_string(content, 2 + driver_name.size * 4)
   end
 
   def car_index
-    @car_index ||= content.unpack("@#{3 + driver_guid.length * 4 + driver_name.length * 4}C").last
+    @car_index ||= AcProtocol.int_8bit(content, 3 + driver_guid.size * 4 + driver_name.size * 4)
   end
 
   def car_model
-    return @car_model if defined? @car_model
-    length = content.unpack("@#{4 + driver_guid.length * 4 + driver_name.length * 4}C").last
-    @car_model = content.unpack("@#{5 + driver_guid.length * 4 + driver_name.length * 4}A#{length}").last
+    @car_model ||= AcProtocol.string(content, 4 + driver_guid.size * 4 + driver_name.size * 4)
   end
 
   def car_skin
-    return @car_skin if defined? @car_skin
-    length = content.unpack("@#{5 + driver_guid.length * 4 + driver_name.length * 4 + car_model.length}C").last
-    @car_skin = content.unpack("@#{6 + driver_guid.length * 4 + driver_name.length * 4 + car_model.length}A#{length}").last
+    @car_skin ||= AcProtocol.string(content, 5 + driver_guid.size * 4 + driver_name.size * 4 + car_model.size)
   end
 end
