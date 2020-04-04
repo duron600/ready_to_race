@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_133808) do
+ActiveRecord::Schema.define(version: 2020_04_04_183005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 2020_04_04_133808) do
     t.string "model"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["model"], name: "index_cars_on_model"
   end
 
   create_table "client_connections", force: :cascade do |t|
@@ -69,7 +68,7 @@ ActiveRecord::Schema.define(version: 2020_04_04_133808) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "leader_boards", force: :cascade do |t|
+  create_table "leaderboard_items", force: :cascade do |t|
     t.bigint "lap_id"
     t.bigint "session_participation_id"
     t.integer "rtime"
@@ -83,8 +82,6 @@ ActiveRecord::Schema.define(version: 2020_04_04_133808) do
     t.integer "current_index"
     t.integer "count"
     t.string "server_name"
-    t.string "track_name"
-    t.string "track_config"
     t.string "name"
     t.integer "typ"
     t.integer "time"
@@ -98,6 +95,8 @@ ActiveRecord::Schema.define(version: 2020_04_04_133808) do
     t.datetime "end_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "track_id"
+    t.index ["track_id"], name: "index_racing_sessions_on_track_id"
   end
 
   create_table "session_participations", force: :cascade do |t|
@@ -114,6 +113,7 @@ ActiveRecord::Schema.define(version: 2020_04_04_133808) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "config"
+    t.index ["name", "config"], name: "index_tracks_on_name_and_config"
     t.index ["name"], name: "index_tracks_on_name"
   end
 

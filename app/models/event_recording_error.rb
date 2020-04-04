@@ -1,0 +1,2 @@
+class EventRecordingError < RuntimeError
+end

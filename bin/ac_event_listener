@@ -10,5 +10,9 @@ server = UDPSocket.new
 server.bind(config['ac']['udp_host'], config['ac']['udp_port'])
 
 while true
-  EventDatum.create(:content => server.recvfrom(1024).first)
+  begin
+    AcServerEvent.create(:content => server.recvfrom(1024).first)
+  rescue => e
+    Rails.logger.warn e.message
+  end
 end

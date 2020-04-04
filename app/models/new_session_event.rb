@@ -1,4 +1,5 @@
 class NewSessionEvent < AcServerEvent
+
   def version
     AcProtocol.int_8bit(content, 1)
   end
@@ -17,6 +18,10 @@ class NewSessionEvent < AcServerEvent
 
   def server_name
     AcProtocol.utf_string(content, 5)
+  end
+
+  def track
+    @track ||= Track.find_or_create_by(:name => track_name, :config => track_config)
   end
 
   def track_name
@@ -61,5 +66,26 @@ class NewSessionEvent < AcServerEvent
 
   def elapsed_ms
     @elapsed_ms ||= AcProtocol.signed_int_32bit(content, 19 + server_name.size * 4 + track_name.size + track_config.size + session_name.size + weather_graphics.size)
+  end
+
+  private
+
+  def save_parsed_content
+    RacingSession.create({
+      :index => session_index,
+      :name => session_name,
+      :current_index => current_session_index,
+      :count => session_count,
+      :server_name => server_name,
+      :track_id => track.id,
+      :typ => typ,
+      :time => session_time,
+      :laps => laps,
+      :wait_time => wait_time,
+      :ambient_temperature => ambient_temperature,
+      :road_temperature => road_temperature,
+      :weather_graphics => weather_graphics,
+      :elapsed_ms => elapsed_ms
+    })
   end
 end

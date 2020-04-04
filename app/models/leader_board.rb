@@ -1,2 +1,0 @@
-class LeaderBoard < ApplicationRecord
-end
