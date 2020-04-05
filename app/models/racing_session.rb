@@ -5,6 +5,7 @@ class RacingSession < ApplicationRecord
   has_many :laps, :through => :session_participations
 
   scope :current, lambda{ where :end_at => nil }
+  scope :participated, lambda { where('total_laps > 0') }
 
   delegate :name, :to => :track, :prefix => true
 
