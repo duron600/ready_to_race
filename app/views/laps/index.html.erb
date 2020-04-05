@@ -13,7 +13,7 @@
   <tr>
     <td><%= lap.driver_name %></td>
     <td><%= lap.car_model %></td>
-    <td><%= lap.time %></td>
+    <td><%= IntervalConverter.ms_to_s lap.time %></td>
     <td><%= lap.cuts %></td>
   </tr>
 <% end %>
