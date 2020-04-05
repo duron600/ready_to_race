@@ -1,0 +1,39 @@
+<table>
+  <thead>
+    <tr>
+      <th>服务器</th>
+      <th>赛事</th>
+      <th>赛道</th>
+      <th>count??</th>
+      <th>时长（分钟）</th>
+      <th>圈数</th>
+      <th>等待时间</th>
+      <th>环境温度</th>
+      <th>赛道温度</th>
+      <th>天气</th>
+      <th>elapsed_ms??</th>
+      <th>开始时间</th>
+      <th>结束时间</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @racing_sessions.each do |session| %>
+  <tr>
+    <td><%= session.server_name %></td>
+    <td><%= link_to session.name, racing_session_laps_path(session) %></td>
+    <td><%= session.track_name %></td>
+    <td><%= session.count %></td>
+    <td><%= session.time %></td>
+    <td><%= session.laps.count %></td>
+    <td><%= session.wait_time %></td>
+    <td><%= session.ambient_temperature %></td>
+    <td><%= session.road_temperature %></td>
+    <td><%= session.weather_graphics %></td>
+    <td><%= session.elapsed_ms %></td>
+    <td><%= session.created_at %></td>
+    <td><%= session.end_at %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+<%= paginate @racing_sessions %>

@@ -1,0 +1,21 @@
+<table>
+  <caption><%= @racing_session.track_name %></caption>
+  <thead>
+    <tr>
+      <th>车手</th>
+      <th>车辆</th>
+      <th>圈速</th>
+      <th>cuts</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @laps.each do |lap| %>
+  <tr>
+    <td><%= lap.driver_name %></td>
+    <td><%= lap.car_model %></td>
+    <td><%= lap.time %></td>
+    <td><%= lap.cuts %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>

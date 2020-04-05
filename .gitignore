@@ -24,3 +24,10 @@
 /config/master.key
 /config/database.yml
 /config/assetto_corsa.yml
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_183005) do
+ActiveRecord::Schema.define(version: 2020_04_05_080404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,16 +50,6 @@ ActiveRecord::Schema.define(version: 2020_04_04_183005) do
     t.index ["guid"], name: "index_drivers_on_guid"
   end
 
-  create_table "lap_records", force: :cascade do |t|
-    t.bigint "racer_id"
-    t.bigint "car_id"
-    t.bigint "track_id"
-    t.string "lap_time"
-    t.integer "lap_time_ms"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "laps", force: :cascade do |t|
     t.bigint "session_participation_id"
     t.integer "time"
@@ -67,6 +57,8 @@ ActiveRecord::Schema.define(version: 2020_04_04_183005) do
     t.integer "cars_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "driver_name"
+    t.string "car_model"
   end
 
   create_table "leaderboard_items", force: :cascade do |t|
@@ -86,7 +78,7 @@ ActiveRecord::Schema.define(version: 2020_04_04_183005) do
     t.string "name"
     t.integer "typ"
     t.integer "time"
-    t.integer "laps"
+    t.integer "setting_laps"
     t.integer "wait_time"
     t.integer "ambient_temperature"
     t.integer "road_temperature"
