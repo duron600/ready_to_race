@@ -81,7 +81,7 @@ class NewSessionEvent < AcServerEvent
       :track_id => track.id,
       :typ => typ,
       :time => session_time,
-      :laps => laps,
+      :setting_laps => laps,
       :wait_time => wait_time,
       :ambient_temperature => ambient_temperature,
       :road_temperature => road_temperature,

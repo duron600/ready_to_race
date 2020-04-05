@@ -14,5 +14,6 @@ while true
     AcServerEvent.receive(server.recvfrom(1024).first)
   rescue => e
     Rails.logger.warn e.message
+    Rails.logger.warn e.backtrace.join("\n")
   end
 end
