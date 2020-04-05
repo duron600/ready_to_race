@@ -71,6 +71,7 @@ class NewSessionEvent < AcServerEvent
   private
 
   def save_parsed_content
+    RacingSession.current.each(&:end)
     RacingSession.create({
       :index => session_index,
       :name => session_name,
