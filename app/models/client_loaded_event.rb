@@ -1,2 +1,2 @@
-class AcClientLoadedEvent < AcServerEvent
+class ClientLoadedEvent < AcServerEvent
 end

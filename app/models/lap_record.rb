@@ -1,2 +1,0 @@
-class LapRecord < ApplicationRecord
-end
