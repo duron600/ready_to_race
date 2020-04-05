@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :racing_sessions, :only => [:index] do
     resources :laps, :only => [:index]
   end
+
+  resources :tracks, :only => [:index, :show]
 end

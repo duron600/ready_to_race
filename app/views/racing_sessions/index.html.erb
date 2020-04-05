@@ -21,7 +21,7 @@
   <tr>
     <td><%= session.server_name %></td>
     <td><%= link_to session.name, racing_session_laps_path(session) %></td>
-    <td><%= session.track_name %></td>
+    <td><%= link_to "#{session.track_name}-#{session.track_config.presence || '默认'}", session.track %></td>
     <td><%= session.count %></td>
     <td><%= session.time %></td>
     <td><%= session.setting_laps %></td>

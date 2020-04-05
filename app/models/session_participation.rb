@@ -4,5 +4,10 @@ class SessionParticipation < ApplicationRecord
 
   has_many :laps, :dependent => :destroy
 
-  delegate :driver_name, :car_model, :to => :client_connection
+  delegate :driver, :car, :driver_name, :car_model, :to => :client_connection
+  delegate :track, :to => :racing_session
+
+  delegate :name, :to => :driver, :prefix => true
+  delegate :model, :to => :car, :prefix => true
+
 end

@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <tr>
+      <th>赛道</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @tracks.each do |track| %>
+  <tr>
+    <td><%= track.name %>-<%= track.config.presence || '默认' %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>

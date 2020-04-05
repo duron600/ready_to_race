@@ -7,7 +7,7 @@ class RacingSession < ApplicationRecord
   scope :current, lambda{ where :end_at => nil }
   scope :participated, lambda { where('total_laps > 0') }
 
-  delegate :name, :to => :track, :prefix => true
+  delegate :config, :name, :to => :track, :prefix => true
 
   def end
     touch :end_at

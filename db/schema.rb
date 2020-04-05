@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_05_081614) do
+ActiveRecord::Schema.define(version: 2020_04_05_100718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,8 +57,12 @@ ActiveRecord::Schema.define(version: 2020_04_05_081614) do
     t.integer "cars_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "driver_name"
-    t.string "car_model"
+    t.bigint "driver_id"
+    t.bigint "car_id"
+    t.bigint "track_id"
+    t.index ["car_id"], name: "index_laps_on_car_id"
+    t.index ["driver_id"], name: "index_laps_on_driver_id"
+    t.index ["track_id"], name: "index_laps_on_track_id"
   end
 
   create_table "leaderboard_items", force: :cascade do |t|
