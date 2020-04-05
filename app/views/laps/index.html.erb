@@ -1,5 +1,5 @@
 <table>
-  <caption><%= @racing_session.track_name %></caption>
+  <caption>赛道：<%= @racing_session.track_name %></caption>
   <thead>
     <tr>
       <th>车手</th>
@@ -13,7 +13,7 @@
   <tr>
     <td><%= lap.driver_name %></td>
     <td><%= lap.car_model %></td>
-    <td><%= IntervalConverter.ms_to_s lap.time %></td>
+    <td><%= ms_to_str lap.time %></td>
     <td><%= lap.cuts %></td>
   </tr>
 <% end %>
