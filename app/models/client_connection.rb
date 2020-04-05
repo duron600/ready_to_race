@@ -7,6 +7,9 @@ class ClientConnection < ApplicationRecord
 
   scope :alive, lambda { where :closed_at => nil }
 
+  delegate :name, :to => :driver, :prefix => true
+  delegate :model, :to => :car, :prefix => true
+
   def close
     touch :closed_at
   end
