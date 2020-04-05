@@ -39,12 +39,12 @@ class LapCompletedEvent < AcServerEvent
       raise EventRecordingError.new("No racing session in progress")
     else
       current_session_participation = SessionParticipation.find_or_create_by({:client_connection_id => connection.id, :racing_session_id => session.id})
-      lap = Lap.create({:session_participation => current_session_participation, :time => lap_time, :cars_count => cars_count, :cuts => cuts })
+      lap = Lap.create!({:session_participation => current_session_participation, :time => lap_time, :cars_count => cars_count, :cuts => cuts })
       session.update_attribute :total_laps, session.laps.count
       leaderboard.each do |item|
         if connection_for_item = ClientConnection.alive.find_by(:car_index => item[:car_id])
           session_participation = SessionParticipation.find_or_create_by({:client_connection_id => connection_for_item.id, :racing_session_id => session.id})
-          lap.leaderboard_items.create({:session_participation_id => session_participation.id, :rtime => item[:rtime], :rlaps => item[:rlaps]})
+          lap.leaderboard_items.create!({:session_participation_id => session_participation.id, :rtime => item[:rtime], :rlaps => item[:rlaps]})
         end
       end
     end

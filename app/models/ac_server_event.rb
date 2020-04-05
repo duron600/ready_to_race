@@ -1,8 +1,6 @@
 class AcServerEvent < ApplicationRecord
 
-  validates :content, :presence => true
-
-  after_create :save_parsed_content
+  after_commit :save_parsed_content, :on => :create
 
   class << self
     def receive(content)
