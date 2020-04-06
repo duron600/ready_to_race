@@ -10,7 +10,17 @@ class ClientConnection < ApplicationRecord
   delegate :name, :to => :driver, :prefix => true
   delegate :model, :to => :car, :prefix => true
 
+  class << self
+    def last_with_car_id(car_id)
+      order(:created_at => 'ASC').where(:car_index => car_id).last
+    end
+  end
+
   def close
     touch :closed_at
+  end
+
+  def reconnect
+    update :closed_at => nil
   end
 end
