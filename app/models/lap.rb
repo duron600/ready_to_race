@@ -10,7 +10,7 @@ class Lap < ApplicationRecord
   before_create :populate_attributes
 
   scope :counting, lambda { where :cuts => 0 }
-  scope :fastest, lambda {counting.select('laps.*').joins('LEFT JOIN laps AS t2 ON laps.driver_id = t2.driver_id AND laps.time > t2.time').where('t2.driver_id is null')}
+  scope :fastest, lambda {joins('JOIN (SELECT MIN(time) AS minimum_time, driver_id FROM laps where cuts = 0 GROUP BY driver_id) AS fastest_lap ON laps.driver_id = fastest_lap.driver_id AND laps.time = fastest_lap.minimum_time')}
 
   delegate :name, :to => :driver, :prefix => true
   delegate :model, :to => :car, :prefix => true
