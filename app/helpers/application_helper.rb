@@ -3,7 +3,7 @@ module ApplicationHelper
     remainder = ms
     r = []
     [3600000, 60000, 1000].each do |base|
-      quotient = remainder.fdiv(base).round
+      quotient = remainder.fdiv(base).floor
       remainder = remainder % base
       r << quotient
     end
