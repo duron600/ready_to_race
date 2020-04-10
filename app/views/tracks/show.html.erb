@@ -1,12 +1,11 @@
 <table>
-  <caption><%= @track.name %>-<%= @track.config.presence || '默认' %>-圈速榜</caption>
+  <caption><%= I18n.t "track.name.#{@track.name}" %>-<%= @track.config.presence || '默认布局' %>-圈速榜</caption>
   <thead>
     <tr>
       <th>排名</th>
       <th>车手</th>
       <th>车辆</th>
       <th>圈速</th>
-      <th>cuts</th>
     </tr>
   </thead>
   <tbody>
@@ -14,9 +13,8 @@
   <tr>
     <td><%= index + 1 + (@laps.current_page - 1) * @laps.limit_value %></td>
     <td><%= lap.driver_name %></td>
-    <td><%= lap.car_model %></td>
+    <td><%= I18n.t "car.model.#{lap.car_model}" %></td>
     <td><%= ms_to_str lap.time %></td>
-    <td><%= lap.cuts %></td>
   </tr>
 <% end %>
   </tbody>

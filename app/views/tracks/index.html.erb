@@ -7,7 +7,7 @@
   <tbody>
 <% @tracks.each do |track| %>
   <tr>
-    <td><%= link_to "#{track.name}-#{track.config.presence || '默认'}", track %></td>
+    <td><%= link_to "#{I18n.t "track.name.#{track.name}"}-#{track.config.presence || '默认布局'}", track %></td>
   </tr>
 <% end %>
   </tbody>

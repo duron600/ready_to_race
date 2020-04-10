@@ -1,5 +1,5 @@
 <table>
-  <caption>赛道：<%= @racing_session.track_name %>-<%= @racing_session.track_config.presence || '默认' %></caption>
+  <caption>赛道：<%= I18n.t "track.name.#{@racing_session.track_name}" %>-<%= @racing_session.track_config.presence || '默认布局' %></caption>
   <thead>
     <tr>
       <th>圈数</th>
@@ -14,7 +14,7 @@
   <tr>
     <td><%= index + 1 %></td>
     <td><%= lap.driver_name %></td>
-    <td><%= lap.car_model %></td>
+    <td><%= I18n.t "car.model.#{lap.car_model}" %></td>
     <td><%= ms_to_str lap.time %></td>
     <td><%= lap.cuts %></td>
   </tr>

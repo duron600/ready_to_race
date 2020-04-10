@@ -1,2 +1,10 @@
 zh-CN:
   hello: "你好，世界。"
+  car:
+    model:
+      ks_toyota_gt86: '丰田86'
+  track:
+    name:
+      jy_stc: '上海天马'
+      goldenpark2010: '北京金港2010'
+      pc_ruisi: '北京锐思'
