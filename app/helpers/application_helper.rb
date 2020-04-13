@@ -7,6 +7,6 @@ module ApplicationHelper
       remainder = remainder % base
       r << quotient
     end
-    r.join(':') << ".#{remainder}"
+    r.join(':') << ".#{remainder.to_s.rjust(3, '0')}"
   end
 end
